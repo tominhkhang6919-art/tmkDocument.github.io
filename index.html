@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="midnight">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>TMK Document — Không Gian Tài Liệu Học Tập Sinh Viên</title>
+  <meta name="description" content="TMK Document — Nền tảng quản lý, tra cứu và lưu trữ tài liệu học tập dành cho sinh viên. Tác giả: Tô Minh Khang — 2026.">
+  <meta name="theme-color" content="#172033">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 46 46'><rect width='46' height='46' rx='12' fill='%237568F5'/><path d='M13 17 C13 17 18 15 23 17 L23 33 C18 31 13 33 13 33 Z' fill='white'/><path d='M33 17 C33 17 28 15 23 17 L23 33 C28 31 33 33 33 33 Z' fill='white'/><path d='M23 15 L23 26 L25.5 24 L28 26 L28 15 Z' fill='%23F28C78'/><path d='M23 9 L30 12 L23 15 L16 12 Z' fill='white'/></svg>">
+  <link rel="stylesheet" href="./src/styles.css">
+</head>
+<body>
+
+  <!-- ==============================================================================
+       INTRO SCREEN (Màn hình chào đón TMK Document - Mục 2)
+       ============================================================================== -->
+  <div id="intro-screen"></div>
+
+  <!-- ==============================================================================
+       HEADER & TOP NAVBAR
+       ============================================================================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <!-- Brand Logo & Name -->
+      <div class="brand-wrapper" id="brand-logo-btn" title="Về trang chủ TMK Document">
+        <div id="brand-logo-container"></div>
+        <div class="brand-text-block">
+          <div class="brand-title-main">
+            <span class="main-accent">TMK</span>
+          </div>
+          <div class="brand-title-sub">DOCUMENT</div>
+        </div>
+      </div>
+
+      <!-- Header Actions: Quick User Pill & Triangle Menu Button -->
+      <div class="header-actions">
+        <!-- User Area Pill -->
+        <div id="header-user-area">
+          <button class="btn-auth-trigger" id="btn-open-auth-modal">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span>Đăng nhập</span>
+          </button>
+        </div>
+
+        <!-- Triangle Menu Button (Yêu cầu mục 4) -->
+        <button class="triangle-menu-btn" id="btn-triangle-menu" aria-label="Menu điều hướng" title="Mở menu điều hướng">
+          <svg class="triangle-icon" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="12 5, 22 19, 2 19"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==============================================================================
+       NAVIGATION DRAWER / SIDEBAR (Mở khi nhấn Nút Tam Giác)
+       ============================================================================== -->
+  <div class="drawer-backdrop" id="drawer-backdrop"></div>
+  <aside class="navigation-drawer" id="navigation-drawer" aria-label="Menu điều hướng">
+    <div class="drawer-header">
+      <div class="drawer-title">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2, 2 22, 22 22"/></svg>
+        <span>Menu Điều Hướng</span>
+      </div>
+      <button class="drawer-close-btn" id="btn-close-drawer" aria-label="Đóng menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <div class="drawer-body">
+      <!-- Mục A: Nhóm môn (Mục 4.A) -->
+      <div>
+        <div class="drawer-section-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          <span>A. Nhóm Môn Học</span>
+        </div>
+        <div class="drawer-nav-list" id="drawer-groups-list">
+          <!-- Rendered dynamically via logic.js -->
+        </div>
+      </div>
+
+      <!-- Mục B: Đổi màu nền / Theme (Mục 4.B & Mục 3.3) -->
+      <div>
+        <div class="drawer-section-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a7 7 0 0 0 0 14v6a10 10 0 0 0 0-20z"/></svg>
+          <span>B. Đổi Màu Giao Diện</span>
+        </div>
+        <div class="theme-picker-grid">
+          <!-- Theme A: Midnight Study -->
+          <div class="theme-card-option" id="theme-btn-midnight" data-theme-name="midnight">
+            <div class="theme-card-header">
+              <span class="theme-card-name">Midnight Study</span>
+              <span class="theme-active-dot"></span>
+            </div>
+            <div class="theme-color-swatches">
+              <span class="color-swatch" style="background:#172033;" title="Midnight Navy"></span>
+              <span class="color-swatch" style="background:#7568F5;" title="Electric Indigo"></span>
+              <span class="color-swatch" style="background:#79E0C3;" title="Soft Mint"></span>
+            </div>
+          </div>
+
+          <!-- Theme B: Sakura Paper -->
+          <div class="theme-card-option" id="theme-btn-sakura" data-theme-name="sakura">
+            <div class="theme-card-header">
+              <span class="theme-card-name">Sakura Paper</span>
+              <span class="theme-active-dot"></span>
+            </div>
+            <div class="theme-color-swatches">
+              <span class="color-swatch" style="background:#FFF8F0;" title="Warm Ivory"></span>
+              <span class="color-swatch" style="background:#286B62;" title="Forest Teal"></span>
+              <span class="color-swatch" style="background:#F28C78;" title="Soft Coral"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mục C: Tài liệu đã lưu & Tiện ích cá nhân (Mục 4.C) -->
+      <div>
+        <div class="drawer-section-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+          <span>C. Không Gian Cá Nhân</span>
+        </div>
+        <div class="drawer-nav-list">
+          <button class="drawer-nav-item" id="drawer-btn-saved-docs">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span>Tài liệu đã lưu</span>
+            <span class="badge-count" id="drawer-saved-count">0</span>
+          </button>
+          <button class="drawer-nav-item" id="drawer-btn-downloaded-docs">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>Tài liệu đã tải</span>
+          </button>
+          <button class="drawer-nav-item" id="drawer-btn-activity-history">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>Lịch sử đã vào</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==============================================================================
+       MAIN CONTAINER & VIEWS
+       ============================================================================== -->
+  <main id="app-root">
+
+    <!-- VIEW 1: HOME PAGE (Intro + 3 Nhóm môn + Tìm kiếm + Danh sách môn học) -->
+    <section id="view-home">
+      <!-- 1. HERO INTRO VỚI NHÂN VẬT STUDENT (Mục 3.2) -->
+      <section class="hero-section">
+        <div class="container">
+          <div class="hero-card">
+            <div class="hero-content">
+              <div class="hero-pill-greeting">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                <span>Chào bạn! Chào mừng bạn đến với TMK Document</span>
+              </div>
+              <h1 class="hero-headline">
+                Nền tảng Quản lý &amp; Tra cứu <span class="text-gradient">Tài liệu Học tập</span> TMK Document
+              </h1>
+              <p class="hero-desc">
+                Hệ thống lưu trữ đề thi, giáo trình, bài giảng và đồ án thực tế được phân loại chuẩn hóa theo 3 nhóm môn học. Đồng bộ dữ liệu cá nhân, tải nhanh và bảo mật tuyệt đối với Supabase.
+              </p>
+              <div class="hero-action-buttons">
+                <button class="btn-primary" id="btn-hero-explore">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  <span>Khám phá môn học</span>
+                </button>
+                <button class="btn-secondary" id="btn-hero-personal">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  <span>Khu vực cá nhân</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Nhân vật minh họa Student (Đeo balo, cầm tài liệu) -->
+            <div class="hero-student-wrapper" id="student-hero-container">
+              <!-- Rendered via branding.js -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. KHU VỰC TÌM KIẾM (Mục 7) -->
+      <section class="search-filter-section">
+        <div class="container">
+          <div class="search-box-wrapper">
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="search-subjects-input" class="search-input" placeholder="Tìm kiếm theo tên môn học, mã môn (CS101, MAT101)..." autocomplete="off">
+            <button class="search-clear-btn" id="btn-clear-search" style="display: none;" title="Xóa tìm kiếm">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+
+          <!-- Lọc nhanh theo nhóm môn -->
+          <div class="group-filter-chips" id="group-filter-chips">
+            <button class="filter-chip active" data-group-id="">Tất cả môn</button>
+            <!-- Chips rendered dynamically -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. BA NHÓM MÔN HỌC (Mục 5) -->
+      <section class="subject-groups-section">
+        <div class="container">
+          <div class="section-header-row">
+            <div>
+              <h2 class="section-title">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2, 2 7, 12 12, 22 7, 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                <span>3 Nhóm Môn Học Chính</span>
+              </h2>
+              <p class="section-subtitle">Chọn nhóm môn để xem danh mục giáo trình và tài liệu ôn tập tương ứng</p>
+            </div>
+          </div>
+
+          <div class="groups-grid" id="groups-grid-container">
+            <!-- Rendered dynamically via subjectService -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. DANH SÁCH MÔN HỌC (Mục 6) -->
+      <section class="subjects-section" id="subjects-list-anchor">
+        <div class="container">
+          <div class="section-header-row">
+            <div>
+              <h2 class="section-title" id="subjects-list-heading">
+                <span>Danh Mục Môn Học</span>
+              </h2>
+              <p class="section-subtitle" id="subjects-count-info">Đang tải danh sách môn học...</p>
+            </div>
+          </div>
+
+          <div class="subjects-grid" id="subjects-grid-container">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- VIEW 2: CHI TIẾT MÔN HỌC & QUẢN LÝ TÀI LIỆU (Mục 8) -->
+    <section id="view-subject-detail" style="display: none;">
+      <div class="container subject-detail-view">
+        <div class="detail-top-nav">
+          <button class="btn-back" id="btn-back-to-subjects">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            <span>Quay về danh sách môn</span>
+          </button>
+          <button class="btn-primary" id="btn-open-upload-modal">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <span>Thêm tài liệu</span>
+          </button>
+        </div>
+
+        <div class="subject-detail-banner" id="subject-detail-banner">
+          <!-- Rendered dynamically -->
+        </div>
+
+        <div class="documents-list-section">
+          <div class="documents-list-header">
+            <h3 class="section-title">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <span>Tài Liệu Học Tập &amp; Đề Thi</span>
+            </h3>
+            <span class="subject-group-pill" id="detail-docs-count">0 tài liệu</span>
+          </div>
+
+          <div class="documents-grid" id="documents-grid-container">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 3: KHU VỰC CÁ NHÂN (Mục 10 & 11) -->
+    <section id="view-personal" style="display: none;">
+      <div class="container personal-section">
+        <div class="personal-header">
+          <div class="section-header-row">
+            <div>
+              <h2 class="section-title">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <span>Không Gian Sinh Viên Cá Nhân</span>
+              </h2>
+              <p class="section-subtitle">Quản lý tài liệu đã lưu, lịch sử tải xuống và nhật ký học tập</p>
+            </div>
+            <button class="btn-secondary" id="btn-back-to-home-from-personal">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+              <span>Về Trang Chủ</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tabs điều hướng 3 mục cá nhân -->
+        <div class="personal-nav-tabs">
+          <button class="personal-tab-btn active" data-tab="saved">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span>Tài liệu đã lưu</span>
+          </button>
+          <button class="personal-tab-btn" data-tab="downloaded">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>Tài liệu đã tải</span>
+          </button>
+          <button class="personal-tab-btn" data-tab="history">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>Lịch sử đã vào</span>
+          </button>
+        </div>
+
+        <!-- Bộ sắp xếp thời gian (Mục 11) -->
+        <div class="sort-controls-bar">
+          <label for="personal-sort-select" style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">Sắp xếp thời gian:</label>
+          <select id="personal-sort-select" class="sort-select">
+            <option value="desc" selected>Mới nhất trước</option>
+            <option value="asc">Cũ nhất trước</option>
+          </select>
+        </div>
+
+        <!-- Tab contents -->
+        <div id="tab-content-saved" class="personal-tab-pane">
+          <div class="documents-grid" id="saved-docs-grid"></div>
+        </div>
+
+        <div id="tab-content-downloaded" class="personal-tab-pane" style="display: none;">
+          <div class="documents-grid" id="downloaded-docs-grid"></div>
+        </div>
+
+        <div id="tab-content-history" class="personal-tab-pane" style="display: none;">
+          <div class="history-timeline-list" id="history-timeline-container"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==============================================================================
+       MODALS: AUTH, PROFILE, UPLOAD, VIEW DOCUMENT, CONFIRM DELETE
+       ============================================================================== -->
+
+  <!-- 1. AUTH MODAL (Đăng nhập / Đăng ký) -->
+  <div class="modal-overlay" id="modal-auth">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title" id="auth-modal-title">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Đăng Nhập Tài Khoản</span>
+        </h3>
+        <button class="modal-close-btn" id="btn-close-auth-modal" aria-label="Đóng">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="auth-form">
+          <div class="form-group" id="auth-group-name" style="display: none;">
+            <label class="form-label" for="auth-input-name">Họ và tên sinh viên</label>
+            <input type="text" id="auth-input-name" class="form-input" placeholder="Ví dụ: Nguyễn Văn A">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="auth-input-email">Email sinh viên</label>
+            <input type="email" id="auth-input-email" class="form-input" placeholder="name@student.edu.vn" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="auth-input-password">Mật khẩu</label>
+            <input type="password" id="auth-input-password" class="form-input" placeholder="Tối thiểu 6 ký tự" required minlength="6">
+          </div>
+
+          <!-- Bộ chọn ảnh đại diện khi đăng ký (Mục 12) -->
+          <div class="form-group" id="auth-group-avatar" style="display: none;">
+            <label class="form-label">Chọn hình đại diện ban đầu</label>
+            <div class="avatar-grid" id="auth-avatar-grid"></div>
+          </div>
+
+          <div style="margin-top: 14px; text-align: center;">
+            <button type="button" id="btn-toggle-auth-mode" style="font-size: 0.88rem; color: var(--color-primary); font-weight: 600;">
+              Chưa có tài khoản? Đăng ký ngay
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="btn-cancel-auth">Hủy</button>
+        <button class="btn-primary" id="btn-submit-auth" form="auth-form">Đăng Nhập</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. USER PROFILE MODAL (Hồ sơ người dùng & 10 Avatar) -->
+  <div class="modal-overlay" id="modal-profile">
+    <div class="modal-card modal-large">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Hồ Sơ Sinh Viên</span>
+        </h3>
+        <button class="modal-close-btn" id="btn-close-profile-modal" aria-label="Đóng">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="profile-form">
+          <div class="form-group">
+            <label class="form-label" for="profile-input-name">Tên hiển thị</label>
+            <input type="text" id="profile-input-name" class="form-input" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="profile-input-email">Email tài khoản</label>
+            <input type="text" id="profile-input-email" class="form-input" disabled style="opacity: 0.7;">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Chọn hình đại diện (10 nhân vật Student)</label>
+            <div class="avatar-grid" id="profile-avatar-grid"></div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="btn-signout" style="margin-right: auto; color: var(--color-danger); border-color: var(--color-danger-light);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          <span>Đăng xuất</span>
+        </button>
+        <button class="btn-secondary" id="btn-close-profile">Đóng</button>
+        <button class="btn-primary" id="btn-save-profile">Lưu thay đổi</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. UPLOAD DOCUMENT MODAL (Mục 8.1) -->
+  <div class="modal-overlay" id="modal-upload">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <span>Tải Lên Tài Liệu Môn Học</span>
+        </h3>
+        <button class="modal-close-btn" id="btn-close-upload-modal" aria-label="Đóng">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="upload-doc-form">
+          <div class="form-group">
+            <label class="form-label" for="upload-doc-title">Tên hiển thị tài liệu *</label>
+            <input type="text" id="upload-doc-title" class="form-input" placeholder="Ví dụ: Đề thi cuối kỳ 2025 có lời giải" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="upload-doc-desc">Mô tả tài liệu</label>
+            <textarea id="upload-doc-desc" class="form-textarea" rows="2" placeholder="Tóm tắt nội dung tài liệu..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Chọn file tài liệu * (PDF, Hình ảnh, Văn bản, DOCX, ZIP - Tối đa 25MB)</label>
+            <div class="file-dropzone" id="file-dropzone">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary); margin-bottom: 8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <p style="font-weight: 600; color: var(--text-main);" id="dropzone-text">Nhấn để chọn file hoặc kéo thả file vào đây</p>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;" id="dropzone-sub">Hỗ trợ PDF, PNG, JPG, WEBP, TXT...</p>
+              <input type="file" id="upload-file-input" style="display: none;" accept=".pdf,.png,.jpg,.jpeg,.webp,.txt,.doc,.docx,.ppt,.pptx,.zip">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="btn-cancel-upload">Hủy</button>
+        <button class="btn-primary" id="btn-submit-upload" form="upload-doc-form">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <span>Tải lên ngay</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. DOCUMENT VIEWER MODAL (Mục 8.2) -->
+  <div class="modal-overlay" id="modal-viewer">
+    <div class="modal-card modal-xl">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 12px; overflow: hidden;">
+          <div id="viewer-file-type-icon"></div>
+          <div style="overflow: hidden;">
+            <h3 class="modal-title" id="viewer-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Xem Tài Liệu</h3>
+            <p id="viewer-filename" style="font-size: 0.78rem; color: var(--text-muted);"></p>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <button class="btn-primary" id="btn-viewer-download" style="padding: 6px 14px; font-size: 0.85rem;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>Tải về</span>
+          </button>
+          <button class="modal-close-btn" id="btn-close-viewer-modal" aria-label="Đóng">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="modal-body" style="padding: 12px; height: 100%;">
+        <div class="doc-viewer-container" id="viewer-render-area">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. CONFIRM DELETE MODAL (Mục 8.4) -->
+  <div class="modal-overlay" id="modal-confirm-delete">
+    <div class="modal-card" style="max-width: 440px;">
+      <div class="modal-header">
+        <h3 class="modal-title" style="color: var(--color-danger);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span>Xác Nhận Xóa Tài Liệu</span>
+        </h3>
+        <button class="modal-close-btn" id="btn-close-delete-modal" aria-label="Đóng">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-main);">
+          Bạn có chắc chắn muốn xóa vĩnh viễn tài liệu <strong id="delete-doc-name-preview" style="color: var(--color-danger);">...</strong>?
+        </p>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 8px;">
+          Hành động này sẽ xóa file vật lý khỏi Supabase Storage và bản ghi trong cơ sở dữ liệu.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="btn-cancel-delete">Hủy bỏ</button>
+        <button class="btn-primary" id="btn-confirm-delete-action" style="background: var(--color-danger);">
+          Xác nhận xóa
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==============================================================================
+       TOAST CONTAINER
+       ============================================================================== -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- ==============================================================================
+       FOOTER (Bắt buộc theo mục 17)
+       ============================================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <p class="footer-quote">
+        “Cảm ơn bạn đã trải nghiệm, chúc bạn gặt hái được nhiều thành công”
+      </p>
+      <div class="footer-author">
+        <span>Tô Minh Khang</span>
+        <span style="opacity: 0.5;">|</span>
+        <span class="footer-badge">2026</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Entrypoint -->
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
+

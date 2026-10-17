@@ -1,0 +1,351 @@
+/* ==============================================================================
+   TMK DOCUMENT — INTRO SCREEN STYLES
+   Màn hình chào đón thương hiệu chuẩn Digital Workspace cao cấp
+   ============================================================================== */
+
+#intro-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  width: 100vw;
+  height: 100vh;
+  height: 100svh;
+  background-color: var(--bg-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.42s cubic-bezier(0.4, 0, 0.2, 1), transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#intro-screen.intro-fade-out {
+  opacity: 0;
+  transform: scale(1.03);
+  pointer-events: none;
+}
+
+/* Ambient Radial Glows (Đồng bộ theo Theme đang chọn) */
+.intro-backdrop-ambient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.intro-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.25;
+  animation: orbDrift 6s ease-in-out infinite alternate;
+}
+
+.intro-orb-1 {
+  width: 380px;
+  height: 380px;
+  background: var(--color-primary);
+  top: 15%;
+  left: 20%;
+}
+
+.intro-orb-2 {
+  width: 320px;
+  height: 320px;
+  background: var(--color-secondary);
+  bottom: 15%;
+  right: 20%;
+  animation-delay: -3s;
+}
+
+@keyframes orbDrift {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(30px, 20px) scale(1.1); }
+}
+
+/* Nút Bỏ qua / Vào trang chủ */
+.intro-skip-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.intro-skip-btn:hover {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+  transform: translateY(-1px);
+}
+
+/* Floating Study Decorative Layer */
+.intro-floating-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.floating-doc {
+  position: absolute;
+  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.12));
+}
+
+.floating-doc.doc-left {
+  width: 72px;
+  top: 28%;
+  left: 14%;
+  transform: rotate(-14deg);
+  animation: floatSheetLeft 4.5s ease-in-out infinite alternate;
+}
+
+.floating-doc.doc-right {
+  width: 68px;
+  bottom: 26%;
+  right: 15%;
+  transform: rotate(12deg);
+  animation: floatSheetRight 5s ease-in-out infinite alternate;
+}
+
+@keyframes floatSheetLeft {
+  0% { transform: translateY(0) rotate(-14deg); }
+  100% { transform: translateY(-16px) rotate(-10deg); }
+}
+
+@keyframes floatSheetRight {
+  0% { transform: translateY(0) rotate(12deg); }
+  100% { transform: translateY(-14px) rotate(16deg); }
+}
+
+/* Sparkles */
+.intro-sparkle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--color-secondary);
+  box-shadow: 0 0 12px var(--color-secondary);
+  animation: sparklePulse 2.5s ease-in-out infinite;
+}
+
+.sparkle-1 { width: 8px; height: 8px; top: 22%; right: 28%; animation-delay: 0.2s; }
+.sparkle-2 { width: 6px; height: 6px; bottom: 24%; left: 26%; animation-delay: 0.9s; }
+.sparkle-3 { width: 10px; height: 10px; top: 40%; left: 18%; animation-delay: 1.4s; }
+
+@keyframes sparklePulse {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 0.9; transform: scale(1.2); }
+}
+
+/* Khối Trung Tâm Chính */
+.intro-center-stage {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 580px;
+  padding: 0 20px;
+}
+
+/* Logo Biểu Tượng Lớn */
+.intro-badge-wrapper {
+  margin-bottom: 20px;
+  animation: introLogoReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.intro-logo-svg {
+  width: 120px;
+  height: 120px;
+  display: block;
+}
+
+@keyframes introLogoReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(18px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Tiêu đề Thương hiệu: TMK Document */
+.intro-brand-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.intro-title-tmk {
+  font-size: 3.8rem;
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: titleRevealUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+.intro-title-document {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--text-main);
+  opacity: 0.95;
+  margin-top: 6px;
+  animation: titleRevealUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+}
+
+@keyframes titleRevealUp {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Phân cách */
+.intro-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 180px;
+  margin: 18px 0 16px;
+  animation: fadeInSlow 0.8s ease 0.5s both;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border-color);
+}
+
+.divider-diamond {
+  font-size: 0.65rem;
+  color: var(--color-secondary);
+}
+
+/* Tagline & Lời chào phụ */
+.intro-tagline {
+  font-size: 1.18rem;
+  font-weight: 600;
+  color: var(--text-main);
+  letter-spacing: -0.2px;
+  margin-bottom: 8px;
+  animation: fadeInSlow 0.9s ease 0.65s both;
+}
+
+.intro-sub-greeting {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  opacity: 0.9;
+  animation: fadeInSlow 0.9s ease 0.8s both;
+}
+
+@keyframes fadeInSlow {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==============================================================================
+   RESPONSIVE (Mobile First)
+   ============================================================================== */
+@media (max-width: 768px) {
+  .floating-doc.doc-left {
+    left: 4%;
+    width: 54px;
+    opacity: 0.6;
+  }
+  .floating-doc.doc-right {
+    right: 4%;
+    width: 50px;
+    opacity: 0.6;
+  }
+  .intro-logo-svg {
+    width: 100px;
+    height: 100px;
+  }
+  .intro-title-tmk {
+    font-size: 3rem;
+  }
+  .intro-title-document {
+    font-size: 0.95rem;
+    letter-spacing: 0.32em;
+  }
+  .intro-tagline {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .floating-doc {
+    display: none; /* Ẩn trang giấy trôi trên màn hình nhỏ để giữ không gian sạch */
+  }
+  .intro-skip-btn {
+    top: 16px;
+    right: 16px;
+    padding: 6px 14px;
+    font-size: 0.8rem;
+  }
+  .intro-logo-svg {
+    width: 86px;
+    height: 86px;
+  }
+  .intro-title-tmk {
+    font-size: 2.5rem;
+  }
+  .intro-title-document {
+    font-size: 0.82rem;
+    letter-spacing: 0.28em;
+  }
+  .intro-tagline {
+    font-size: 0.92rem;
+  }
+  .intro-sub-greeting {
+    font-size: 0.75rem;
+    letter-spacing: 1.2px;
+  }
+}
+
+/* Hỗ trợ chế độ giảm chuyển động của hệ điều hành */
+@media (prefers-reduced-motion: reduce) {
+  #intro-screen, .intro-badge-wrapper, .intro-title-tmk, 
+  .intro-title-document, .intro-divider, .intro-tagline, 
+  .intro-sub-greeting, .intro-orb, .floating-doc, .intro-sparkle {
+    animation: none !important;
+    transition: opacity 0.2s ease !important;
+  }
+}
+

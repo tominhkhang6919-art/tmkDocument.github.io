@@ -1,0 +1,18 @@
+{
+  "name": "tmk-document",
+  "version": "1.0.0",
+  "description": "Nền tảng Quản lý & Tra cứu Tài liệu Học tập Sinh viên TMK document",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview --host"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.118.0",
+    "lucide": "^1.59.0"
+  },
+  "devDependencies": {
+    "vite": "^8.3.4"
+  }
+}
