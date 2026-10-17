@@ -611,16 +611,17 @@ input, textarea, select {
   max-height: 240px;
 }
 
-.student-hero-illustration {
+.student-hero-illustration, .ctu-hero-logo {
   width: 100%;
-  max-width: 270px;
+  max-width: 260px;
   height: auto;
-  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.15));
-  transition: transform var(--transition-normal);
+  filter: drop-shadow(0 14px 28px rgba(0, 76, 140, 0.28));
+  transition: transform var(--transition-normal), filter var(--transition-normal);
 }
 
-.student-hero-illustration:hover {
-  transform: translateY(-4px) scale(1.02);
+.student-hero-illustration:hover, .ctu-hero-logo:hover {
+  transform: translateY(-4px) scale(1.03);
+  filter: drop-shadow(0 18px 34px rgba(0, 76, 140, 0.42));
 }
 
 /* ==============================================================================
@@ -1664,8 +1665,8 @@ input, textarea, select {
   .hero-student-wrapper {
     max-height: 200px;
   }
-  .student-hero-illustration {
-    max-width: 220px;
+  .student-hero-illustration, .ctu-hero-logo {
+    max-width: 210px;
   }
   .groups-grid {
     grid-template-columns: 1fr;

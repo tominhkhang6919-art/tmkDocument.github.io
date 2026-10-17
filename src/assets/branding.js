@@ -1,7 +1,7 @@
 // ==============================================================================
-// TMK DOCUMENT — BRAND LOGO, FAVICON & STUDENT HERO ILLUSTRATION
+// TMK DOCUMENT — BRAND LOGO, FAVICON & ĐẠI HỌC CẦN THƠ (CTU) EMBLEM
 // Brand: TMK Document
-// Tác giả: Tô Minh Khang | 2026
+// Tác giả: Tô Minh Khang — 2026
 // ==============================================================================
 
 // 1. HORIZONTAL NAVBAR LOGO
@@ -101,98 +101,93 @@ export const INTRO_LOGO_SVG = `
 </svg>
 `;
 
-// 3. STUDENT HERO ILLUSTRATION (In Welcome banner)
-export const STUDENT_HERO_SVG = `
-<svg class="student-hero-illustration" viewBox="0 0 320 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+// 3. LOGO CHÍNH THỨC TRƯỜNG ĐẠI HỌC CẦN THƠ (CAN THO UNIVERSITY - CTU)
+// Thay thế hoàn toàn nhân vật cũ theo yêu cầu người dùng
+export const CTU_LOGO_SVG = `
+<svg class="ctu-hero-logo" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="studentBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="var(--color-primary, #7568F5)" stop-opacity="0.15"/>
-      <stop offset="100%" stop-color="var(--color-secondary, #79E0C3)" stop-opacity="0.05"/>
+    <!-- CTU Brand Colors -->
+    <linearGradient id="ctuBlueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0066B3"/>
+      <stop offset="50%" stop-color="#004C8C"/>
+      <stop offset="100%" stop-color="#002D59"/>
     </linearGradient>
-    <linearGradient id="studentCoatGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="var(--color-primary, #7568F5)"/>
-      <stop offset="100%" stop-color="#4F46E5"/>
+    <linearGradient id="ctuGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE047"/>
+      <stop offset="50%" stop-color="#EAB308"/>
+      <stop offset="100%" stop-color="#CA8A04"/>
     </linearGradient>
-    <linearGradient id="backpackGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#F59E0B"/>
-      <stop offset="100%" stop-color="#D97706"/>
+    <linearGradient id="ctuOuterAura" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="var(--color-primary, #7568F5)" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="var(--color-secondary, #79E0C3)" stop-opacity="0.04"/>
     </linearGradient>
+    <filter id="ctuDropShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#002D59" flood-opacity="0.35"/>
+    </filter>
   </defs>
 
-  <!-- Background Decorative Circle & Sparkles -->
-  <circle cx="160" cy="140" r="115" fill="url(#studentBgGrad)"/>
-  <circle cx="270" cy="70" r="6" fill="var(--color-secondary, #79E0C3)" opacity="0.8"/>
-  <circle cx="60" cy="190" r="8" fill="var(--color-primary, #7568F5)" opacity="0.4"/>
-  <path d="M260 180 L265 190 L275 195 L265 200 L260 210 L255 200 L245 195 L255 190 Z" fill="var(--color-secondary, #79E0C3)" opacity="0.7"/>
+  <!-- Outer Ambient Aura Rings -->
+  <circle cx="160" cy="160" r="150" fill="url(#ctuOuterAura)"/>
+  <circle cx="160" cy="160" r="144" stroke="#0066B3" stroke-width="2" stroke-dasharray="6 6" opacity="0.4"/>
+  <circle cx="160" cy="160" r="138" stroke="url(#ctuGoldGrad)" stroke-width="1.5" opacity="0.6"/>
 
-  <!-- Backpack (visible behind back & shoulder straps) -->
-  <rect x="75" y="110" width="38" height="75" rx="16" fill="url(#backpackGrad)"/>
-  <rect x="70" y="125" width="10" height="40" rx="5" fill="#B45309"/>
-  <!-- Top handle of backpack -->
-  <path d="M85 110 C85 98 100 98 100 110" stroke="#92400E" stroke-width="4" fill="none"/>
+  <!-- Main Circular Emblem Badge -->
+  <circle cx="160" cy="160" r="130" fill="url(#ctuBlueGrad)" filter="url(#ctuDropShadow)"/>
 
-  <!-- Student Body / Jacket -->
-  <path d="M100 240 C100 185 115 145 155 145 C195 145 210 185 210 240 Z" fill="url(#studentCoatGrad)"/>
-  <!-- Backpack straps over shoulder -->
-  <path d="M118 148 C118 170 120 200 122 225" stroke="#F59E0B" stroke-width="7" stroke-linecap="round"/>
+  <!-- Double Golden Ring -->
+  <circle cx="160" cy="160" r="126" stroke="url(#ctuGoldGrad)" stroke-width="3" fill="none"/>
+  <circle cx="160" cy="160" r="94" stroke="url(#ctuGoldGrad)" stroke-width="2" fill="none"/>
+
+  <!-- Circular Text Path: Upper Arc (TRƯỜNG ĐẠI HỌC CẦN THƠ) -->
+  <path id="ctuTopArc" d="M 45,160 A 115,115 0 0,1 275,160" fill="none"/>
+  <text font-family="'Be Vietnam Pro', 'Montserrat', sans-serif" font-size="14.5" font-weight="800" fill="#FFFFFF" letter-spacing="2.2">
+    <textPath href="#ctuTopArc" startOffset="50%" text-anchor="middle">
+      TRƯỜNG ĐẠI HỌC CẦN THƠ
+    </textPath>
+  </text>
+
+  <!-- Circular Text Path: Lower Arc (CAN THO UNIVERSITY • 1966) -->
+  <path id="ctuBottomArc" d="M 275,160 A 115,115 0 0,1 45,160" fill="none"/>
+  <text font-family="'Be Vietnam Pro', 'Montserrat', sans-serif" font-size="12" font-weight="700" fill="url(#ctuGoldGrad)" letter-spacing="2">
+    <textPath href="#ctuBottomArc" startOffset="50%" text-anchor="middle">
+      CAN THO UNIVERSITY • 1966
+    </textPath>
+  </text>
+
+  <!-- Left & Right Stars on the Rim -->
+  <polygon points="40,160 43,153 50,153 44,158 46,165 40,161 34,165 36,158 30,153 37,153" fill="url(#ctuGoldGrad)"/>
+  <polygon points="280,160 283,153 290,153 284,158 286,165 280,161 274,165 276,158 270,153 277,153" fill="url(#ctuGoldGrad)"/>
+
+  <!-- Inner Center Circle -->
+  <circle cx="160" cy="160" r="92" fill="#FFFFFF"/>
+
+  <!-- CTU Inner Logo Elements: -->
+  <!-- 1. Sóng nước Cửu Long (Mekong Delta River Waves) -->
+  <path d="M88 190 Q124 178 160 190 Q196 202 232 190 L232 208 Q196 220 160 208 Q124 196 88 208 Z" fill="#0066B3" opacity="0.9"/>
+  <path d="M96 202 Q128 192 160 202 Q192 212 224 202 L224 214 Q192 224 160 214 Q128 204 96 214 Z" fill="#0284C7" opacity="0.6"/>
+
+  <!-- 2. Quyển sách mở tượng trưng cho tri thức (Open Book) -->
+  <path d="M102 168 C120 156 145 158 160 166 C175 158 200 156 218 168 L218 184 C200 172 175 174 160 182 C145 174 120 172 102 184 Z" fill="#004C8C"/>
+  <path d="M106 170 C122 160 144 161 158 167 L158 179 C144 173 122 172 106 181 Z" fill="#FFFFFF"/>
+  <path d="M214 170 C198 160 176 161 162 167 L162 179 C176 173 198 172 214 181 Z" fill="#F1F5F9"/>
+
+  <!-- 3. Ngọn đuốc / Cánh chim / Chữ V - CTU vươn lên -->
+  <!-- Left Wing / Lotus petal -->
+  <path d="M160 158 C148 142 128 126 122 104 C138 112 152 128 158 144 Z" fill="url(#ctuGoldGrad)"/>
+  <!-- Right Wing / Lotus petal -->
+  <path d="M160 158 C172 142 192 126 198 104 C182 112 168 128 162 144 Z" fill="url(#ctuGoldGrad)"/>
   
-  <!-- Inner T-shirt with V-neck -->
-  <path d="M142 145 L155 175 L168 145 Z" fill="#FFFFFF"/>
-  <path d="M148 152 L155 168 L162 152 Z" fill="var(--color-secondary, #79E0C3)"/>
+  <!-- Central Torch Flame / Spire of Knowledge -->
+  <path d="M160 92 C164 106 170 120 160 148 C150 120 156 106 160 92 Z" fill="#EF4444"/>
+  <path d="M160 102 C162 112 166 122 160 142 C154 122 158 112 160 102 Z" fill="url(#ctuGoldGrad)"/>
 
-  <!-- Neck -->
-  <rect x="145" y="120" width="20" height="28" rx="6" fill="#FED7AA"/>
-
-  <!-- Head / Face -->
-  <ellipse cx="155" cy="95" rx="28" ry="32" fill="#FED7AA"/>
-  <!-- Ears -->
-  <circle cx="127" cy="96" r="6" fill="#FED7AA"/>
-  <circle cx="183" cy="96" r="6" fill="#FED7AA"/>
-
-  <!-- Modern Hair Style -->
-  <path d="M125 90 C123 60 145 50 162 50 C180 50 190 62 187 80 C183 72 175 68 160 68 C145 68 135 76 130 90 Z" fill="#1E293B"/>
-  <path d="M130 75 Q155 58 178 72" stroke="#334155" stroke-width="3" fill="none" stroke-linecap="round"/>
-
-  <!-- Friendly Face details: Eyebrows, Eyes with shine, Warm Smile -->
-  <path d="M138 85 Q145 82 150 85" stroke="#1E293B" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-  <path d="M160 85 Q165 82 172 85" stroke="#1E293B" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-  <!-- Eyes -->
-  <ellipse cx="144" cy="93" rx="3.5" ry="4" fill="#0F172A"/>
-  <circle cx="145.5" cy="91.5" r="1.5" fill="#FFFFFF"/>
-  <ellipse cx="166" cy="93" rx="3.5" ry="4" fill="#0F172A"/>
-  <circle cx="167.5" cy="91.5" r="1.5" fill="#FFFFFF"/>
-  <!-- Cheeks blush -->
-  <ellipse cx="138" cy="101" rx="4" ry="2.5" fill="#F472B6" opacity="0.6"/>
-  <ellipse cx="172" cy="101" rx="4" ry="2.5" fill="#F472B6" opacity="0.6"/>
-  <!-- Big Friendly Smile -->
-  <path d="M147 106 Q155 116 163 106" stroke="#0F172A" stroke-width="2.8" stroke-linecap="round" fill="none"/>
-  <path d="M149 107 Q155 114 161 107" fill="#EF4444" opacity="0.8"/>
-
-  <!-- Right Arm holding College Document Folder / Tablet -->
-  <path d="M195 170 C205 185 210 205 200 225" stroke="url(#studentCoatGrad)" stroke-width="18" stroke-linecap="round" fill="none"/>
-  <!-- Hand -->
-  <circle cx="198" cy="225" r="10" fill="#FED7AA"/>
-
-  <!-- Study Document Folder / Tablet in hand -->
-  <g transform="translate(190, 185) rotate(-10)">
-    <rect x="0" y="0" width="55" height="42" rx="6" fill="#1E293B" stroke="var(--color-secondary, #79E0C3)" stroke-width="2"/>
-    <rect x="6" y="8" width="28" height="4" rx="2" fill="var(--color-secondary, #79E0C3)"/>
-    <rect x="6" y="16" width="40" height="3" rx="1.5" fill="#94A3B8"/>
-    <rect x="6" y="23" width="34" height="3" rx="1.5" fill="#94A3B8"/>
-    <rect x="6" y="30" width="20" height="3" rx="1.5" fill="#94A3B8"/>
-    <!-- Checkmark badge on document -->
-    <circle cx="45" cy="30" r="5" fill="var(--color-primary, #7568F5)"/>
-    <path d="M43 30 L45 32 L48 29" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  </g>
-
-  <!-- Left Arm with Friendly Thumbs-up / Wave -->
-  <path d="M115 170 C100 185 92 195 105 215" stroke="url(#studentCoatGrad)" stroke-width="18" stroke-linecap="round" fill="none"/>
-  <circle cx="106" cy="216" r="10" fill="#FED7AA"/>
-  <!-- Pen or notebook bookmark in hand -->
-  <rect x="100" y="210" width="6" height="18" rx="2" fill="var(--color-accent, #F28C78)" transform="rotate(25 100 210)"/>
-
-  <!-- Badge on chest: "STUDENT" -->
-  <rect x="135" y="185" width="40" height="15" rx="7.5" fill="#FFFFFF" opacity="0.95"/>
-  <text x="155" y="196" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8.5" font-weight="800" fill="var(--color-primary, #7568F5)">STUDENT</text>
+  <!-- Chữ CTU nổi bật ở giữa đế sách -->
+  <text x="160" y="234" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="18" font-weight="900" fill="#004C8C" letter-spacing="4">
+    CTU
+  </text>
 </svg>
 `;
+
+// Export alias để tương thích ngược nếu có file gọi STUDENT_HERO_SVG
+export const STUDENT_HERO_SVG = CTU_LOGO_SVG;
+export const CAN_THO_UNIVERSITY_LOGO_SVG = CTU_LOGO_SVG;
